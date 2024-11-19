@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./CG_F24_Program3x_KailongDuan.css">
+</head>
+<body>
+    <form id="radioForm">
+        <div class="container">
+            <div class="controls">
+                <div class="color">
+                    <h2>Color Filters</h2>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-halftone" id="HalftoneBayer">
+                            <label for="HalftoneBayer">HalftoneBayer</label>
+                        </div>
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-halftone" id="halftonePattern">
+                            <label for="halftonePattern">Halftone Pattern</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="dotSize">Dot Size</label>
+                                <input type="range" name="dotSize" value="8.0" min="0.0" step="0.1" max="20.0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-emboss" id="emboss">
+                            <label for="emboss">Emboss</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="embossStrength">Strength</label>
+                                <input type="range" name="embossStrength" value="0.0" min="0.0" step="0.1" max="3.0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-nightvision" id="nightvision">
+                            <label for="nightvision">Night Vision</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="nightVisionStrength">Strength</label>
+                                <input type="range" name="nightVisionStrength" value="0.5" min="0.0" step="0.1"
+                                    max="2.0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-sabedge" id="sabedge">
+                            <label for="sabedge">Sab Edge</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="edgeStrength">Strength </label>
+                                <input type="range" name="edgeStrength" value="0.0" value="0.5" value="0.0" min="0.0"
+                                    step="0.1" max="2.0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-cartoon" id="cartoon">
+                            <label for="cartoon">Cartoon</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="cartoonLevels">Strength </label>
+                                <input type="range" name="cartoonLevels" value="6.0" min="2.0" step="0.1" max="10.0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-oldpicture" id="oldpicture">
+                            <label for="oldpicture">Old Picture</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="oldpictureStrength">Strength</label>
+                                <input type="range" name="oldpictureStrength" value="0" min="0.0" step="0.1" max="5">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas-container" >
+                <canvas id="gl-canvas" width="512" height="512">
+                    Oops ... your browser doesn't support the HTML5 canvas element
+                </canvas>
+                <input type="file" id="fileInput">
+            </div>
+            <div class="controls">
+                <div class="texture">
+                    <h2>Texture Filters</h2>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-blur" id="gaussianBlur">
+                            <label for="gaussianBlur">gaussianBlur</label>
+                        </div>
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-blur" id="motionBlur">
+                            <label for="motionBlur">motionBlur</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="blurStrength">Strength</label>
+                                <input type="range" name="blurStrength" value="1"  min="0" step="1" max="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-wave" id="wave">
+                            <label for="wave">Wave</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="waveStrength">Wave Strength</label>
+                                <input type="range" name="waveStrength" value="20" min="0" step="1" max="100">
+                            </div>
+                            <div class="slider-container">
+                                <label for="waveFrequency">Frequency</label>
+                                <input type="range" name="waveStrength" value="10" min="10" step="1" max="100">
+                            </div>
+                            <div class="slider-container">
+                                <label for="swirlStrength">Swirl</label>
+                                <input type="range" name="swirlStrength" value="0" min="0" step="0.1" max="10">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-mosaic" id="mosaic">
+                            <label for="mosaic">Mosaic</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="mosaicSize">Size</label>
+                                <input type="range" name="mosaicSize" value="1" min="5" step="1" max="50">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-header">
+                            <input type="radio" name="color" value="fragment-shader-fisheye" id="fisheye">
+                            <label for="fisheye">Fish Eye</label>
+                        </div>
+                        <div class="filter-controls">
+                            <div class="slider-container">
+                                <label for="fisheyeStrength">Strength</label>
+                                <input type="range" name="fisheyeStrength" min="0" step="0.5" max="30" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+<script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    in vec4 aPosition;
+    in vec2 aTexCoord;
+    out vec2 vTexCoord;
+    void main()
+    {
+        gl_Position = aPosition;
+        vTexCoord = aTexCoord;
+    }
+    </script>
+<script id="fragment-shader-orginal" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        in vec2 vTexCoord;
+        out vec4 fragColor;
+        uniform sampler2D uTexMap;
+        void main() {
+            fragColor = texture(uTexMap, vTexCoord);
+        }
+    </script>
+<script id="fragment-shader-halftone" type="x-shader/x-fragment">
+    #version 300 es
+    precision highp float;
+    in vec2 vTexCoord;
+    out vec4 fragColor;
+    uniform sampler2D uTexMap;
+    uniform sampler2D uHalftoneTex;
+    uniform float uDotSize;
+    uniform vec2 uResolution;
+    void main() {
+        vec4 color = texture(uTexMap, vTexCoord);
+        float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+        vec2 pixelPos = gl_FragCoord.xy;
+        vec2 halftoneSamplePos = mod(pixelPos, uDotSize) / uDotSize;
+        float halftoneValue = texture(uHalftoneTex, halftoneSamplePos).r;
+        float finalColor = step(halftoneValue, gray);
+        fragColor = vec4(vec3(finalColor), 1.0);
+    }
+    </script>
+<script id="fragment-shader-emboss" type="x-shader/x-fragment">
+                #version 300 es
+                precision mediump float;
+                in vec2 vTexCoord;
+                out vec4 fragColor;
+                uniform sampler2D uTexMap;
+                uniform vec2 uResolution;
+                uniform float uEmbossStrength;
+                vec4 embossEffect() {
+                    vec2 onePixel = 1.0 / uResolution;
+                    vec4 color = texture(uTexMap, vTexCoord);
+                    vec4 colorLeft = texture(uTexMap, vTexCoord - onePixel);
+                    return vec4(0.5 + (color - colorLeft).rgb * uEmbossStrength, 1.0);
+                }
+                void main() {
+                    vec4 originColor = texture(uTexMap, vTexCoord);
+                    fragColor = mix(originColor, embossEffect(), uEmbossStrength);
+                }
+    </script>
+<script id="fragment-shader-sabedge" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        in vec2 vTexCoord;
+        out vec4 fragColor;
+        uniform sampler2D uTexMap;
+        uniform vec2 uResolution;
+        uniform float uEdgeStrength;
+        vec4 sobelEdge() {
+            float sobelX[9] = float[](
+                -1.0, 0.0, 1.0,
+                -2.0, 0.0, 2.0,
+                -1.0, 0.0, 1.0
+            );
+            float sobelY[9] = float[](
+                -1.0, -2.0, -1.0,
+                0.0, 0.0, 0.0,
+                1.0, 2.0, 1.0
+            );
+            vec2 texelSize = 1.0 / uResolution;
+            float dx = 0.0;
+            float dy = 0.0;
+            int count = 0;
+            for(int i = -1; i <= 1; i++) {
+                for(int j = -1; j <= 1; j++) {
+                    vec2 offset = vec2(float(i), float(j)) * texelSize;
+                    vec3 pixelColor = texture(uTexMap, vTexCoord + offset).rgb;
+                    float luminance = dot(pixelColor, vec3(0.299, 0.587, 0.114));
+                    dx += luminance * sobelX[count];
+                    dy += luminance * sobelY[count];
+                    count++;
+                }
+            }
+            float edge = clamp(sqrt(dx * dx + dy * dy) * uEdgeStrength, 0.0, 1.0);
+            return vec4(vec3(1.0 - edge), 1.0);
+        }
+        void main() {
+            vec4 originColor = texture(uTexMap, vTexCoord);
+            fragColor = mix(originColor, sobelEdge(), uEdgeStrength);
+        }
+    </script>
+<script id="fragment-shader-cartoon" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    in vec2 vTexCoord;
+    out vec4 fragColor;
+    uniform sampler2D uTexMap;
+    uniform float uCartoonLevels;
+    vec4 cartoonEffect() {
+
+        vec4 color = texture(uTexMap, vTexCoord);
+
+        vec3 levels = (floor(color.rgb * uCartoonLevels + 0.5) / uCartoonLevels);
+
+        return vec4(levels, 1.0);
+    }
+    void main() {
+        fragColor = cartoonEffect();
+    }
+</script>
+<script id="fragment-shader-nightvision" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        in vec2 vTexCoord;
+        out vec4 fragColor;
+        uniform sampler2D uTexMap;
+        uniform vec2 uResolution;
+        uniform float uNightVisionStrength;
+        vec4 nightVisionEffect(vec4 color) {
+            float luminance = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+            return vec4(vec3(0.0, luminance, 0.0) * uNightVisionStrength, 1.0);
+        }
+        void main() {
+            vec4 originColor = texture(uTexMap, vTexCoord);     
+            fragColor = nightVisionEffect(originColor);
+        }
+     </script>
+<script id="fragment-shader-oldpicture" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    in vec2 vTexCoord;
+    out vec4 fragColor;
+    uniform sampler2D uTexMap;
+    uniform vec2 uResolution;
+    uniform float uOldpictureStrength;
+    float rand(vec2 co) {
+        return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);
+    }
+    float noise(vec2 coord) {
+        vec2 i = floor(coord);
+        vec2 f = fract(coord);
+        float a = rand(i);
+        float b = rand(i + vec2(1.0, 0.0));
+        float c = rand(i + vec2(0.0, 1.0));
+        float d = rand(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+    }
+    float vignette(vec2 coord) {
+        vec2 center = coord - vec2(0.5);
+        float dist = length(center);
+
+        return smoothstep(0.7, 0.2, dist);
+    }
+    vec4 vintageEffect(vec2 coord) {
+        vec4 color = texture(uTexMap, coord);
+
+        float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+        vec3 sepia = vec3(
+            gray * (1.2 + uOldpictureStrength * 0.3),
+            gray * (0.9 - uOldpictureStrength * 0.1),
+            gray * (0.6 - uOldpictureStrength * 0.2)
+        );
+
+        float noiseValue = noise(coord * (400.0 + uOldpictureStrength * 200.0));
+        sepia += (noiseValue - 0.5) * (0.1 + uOldpictureStrength * 0.2);
+
+        float vig = vignette(coord);
+        float vigStrength = mix(0.7, 1.0, vig);
+        vigStrength = mix(vigStrength, vigStrength * 0.8, uOldpictureStrength);
+        sepia *= vigStrength;
+
+        sepia = pow(sepia, vec3(1.1 + uOldpictureStrength * 0.2));
+
+        float avgColor = (sepia.r + sepia.g + sepia.b) / 3.0;
+        sepia = mix(vec3(avgColor), sepia, 1.2 + uOldpictureStrength * 0.3);
+
+        sepia.r += uOldpictureStrength * 0.1;
+        sepia.b -= uOldpictureStrength * 0.05;
+        sepia = clamp(sepia, 0.0, 1.0);
+        return vec4(sepia, color.a);
+    }
+    void main() {
+        fragColor = vintageEffect(vTexCoord);
+    }
+    </script>
+<script id="fragment-shader2" type="x-shader/x-fragment">
+            #version 300 es 
+            precision mediump float;
+            in vec2 vTexCoord;
+            out vec4 fragColor;
+            uniform float uBlurStrength;
+            uniform float distortAmount;
+            uniform sampler2D uTexMap;
+            uniform vec2 uResolution;
+               vec4 blur() {
+                vec4 color = vec4(0.0);
+                float total = 0.0;
+                for(float x = -4.0; x <= 4.0; x++) {
+                    for(float y = -4.0; y <= 4.0; y++) {
+                        vec2 offset = vec2(x, y) * uBlurStrength / uResolution;
+                        color += texture(uTexMap, vTexCoord + offset);
+                        total += 1.0;
+                    }
+                }
+                return color / total;
+            }
+            vec2 distort(vec2 coord) {
+                vec2 center = vec2(0.5, 0.5);
+                vec2 dir = coord - center;
+                float dist = length(dir);
+                float factor = 1.0 - (distortAmount / 1000.0) * dist;
+                return center + dir * factor;
+            }
+            void main() {
+                vec2 coord = distort(vTexCoord);   
+                fragColor = blur();
+            }  
+    </script>
+<script id="fragment-shader-blur" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    in vec2 vTexCoord;
+    out vec4 fragColor;
+    uniform sampler2D uTexMap;
+    uniform float uBlurStrength;
+    uniform vec2 uResolution;
+    uniform float uBlurChange;
+    vec4 gaussianBlur() {
+        vec4 color = vec4(0.0);
+        float sigma = max(1.0, uBlurStrength * 2.0); 
+        float total = 0.0;
+
+        for (float i = -5.0; i <= 5.0; i++) {
+            for (float j = -5.0; j <= 5.0; j++) {
+                float weight = exp(-(i * i + j * j) / (2.0 * sigma * sigma));
+                vec2 offset = vec2(i, j) / uResolution * uBlurStrength; 
+                color += texture(uTexMap, vTexCoord + offset) * weight;
+                total += weight;
+            }
+        }
+        return color / total;
+    }
+    vec4 motionBlur() {
+        vec4 color = vec4(0.0);
+        vec2 direction = vec2(1.0, 0.0);
+        for (float i = -4.0; i <= 4.0; i++) {
+            vec2 offset = direction * i * uBlurStrength / uResolution;
+            color += texture(uTexMap, vTexCoord + offset);
+        }
+        return color / 9.0;
+    }
+    void main() {
+        if(uBlurChange==0.0){
+            fragColor = gaussianBlur();
+        }else{
+            fragColor = motionBlur();
+        }
+    }
+    </script>
+<script id="fragment-shader-wave" type="x-shader/x-fragment">
+    #version 300 es
+    precision mediump float;
+    in vec2 vTexCoord;
+    out vec4 fragColor;
+    uniform sampler2D uTexMap;
+    uniform vec2 uResolution;
+    uniform float uWaveStrength;
+    uniform float uWaveFrequency;
+    uniform float uSwirlStrength;
+    const float TIME = 12.0;
+    vec2 waveDistort(vec2 coord) {
+        float wave = sin(coord.x * uWaveFrequency + TIME) * uWaveStrength;
+         return coord + vec2(0.0, wave) / uResolution;
+     }
+    vec2 swirlEffect(vec2 coord) {
+
+        vec2 center = vec2(0.5);
+        vec2 toCenter = coord - center;
+        float dist = length(toCenter);
+
+        float swirl = uSwirlStrength * smoothstep(1.0, 0.0, dist);
+        float angle = atan(toCenter.y, toCenter.x) + swirl;
+        return center + dist * vec2(cos(angle), sin(angle));
+    }
+    void main() {
+
+        vec2 coord = waveDistort(vTexCoord);
+        coord = swirlEffect(coord);
+
+        coord = clamp(coord, 0.0, 1.0);
+        fragColor = texture(uTexMap, coord);
+    }
+    </script>
+<script id="fragment-shader-mosaic" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        in vec2 vTexCoord;
+        out vec4 fragColor;
+        uniform sampler2D uTexMap;
+        uniform vec2 uResolution;
+        uniform float uMosaicSize;
+        vec4 mosaicEffect() {
+            vec2 mosaicScale = floor(vTexCoord * uResolution / uMosaicSize) * uMosaicSize / uResolution;
+            return texture(uTexMap, mosaicScale);
+        }
+        void main() {
+            fragColor = mosaicEffect();
+        }
+    </script>
+<script id="fragment-shader-fisheye" type="x-shader/x-fragment">
+        #version 300 es
+        precision mediump float;
+        in vec2 vTexCoord;
+        out vec4 fragColor;
+        uniform float uFisheyeStrength;
+        uniform sampler2D uTexMap;
+        vec2 fisheyeDistortion(vec2 coord) {
+            vec2 p = coord * 2.0 - 1.0;
+            float r = length(p);
+            float fisheye = (1.0 - uFisheyeStrength) + uFisheyeStrength * (r > 0.0 ? atan(r) / r : 1.0);
+            p *= fisheye;
+            return (p + 1.0) * 0.5;
+        }
+        vec2 fisheyeDistortion2(vec2 coord) {
+            vec2 p = (coord - 0.5) * 2.0;
+            float r = length(p);
+            float distortionFactor = 1.0 + r * r * uFisheyeStrength;
+            p = p / distortionFactor;
+            return p * 0.5 + 0.5;
+        }
+        void main() {
+            vec2 distortedCoord = fisheyeDistortion(vTexCoord);
+            fragColor = texture(uTexMap, distortedCoord);
+        }
+    </script>
+<script type="text/javascript" src="initShaders.js"></script>
+<script type="text/javascript" src="MVnew.js"></script>
+<script src="./CG_F24_Program3x_KailongDuan_loader.js"></script>
+<script src="./CG_F24_Program3x_KailongDuan_drawer.js"></script>
+<script src="./CG_F24_Program3x_KailongDuan_controller.js"> </script>
+<script type="text/javascript" src="./CG_F24_Program3x_KailongDuan.js"></script>
+</html>
