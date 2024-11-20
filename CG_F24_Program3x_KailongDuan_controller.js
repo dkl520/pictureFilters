@@ -23,17 +23,31 @@ class Controller {
     }
 
     handlePict() {
+        // var canvas = document.getElementById("gl-canvas");
+        // canvas.toBlob((blob) => {
+        //     const url = URL.createObjectURL(blob);
+        //     const link = document.createElement('a');
+        //     link.href = url;
+        //     link.download = 'canvas_image.png';
+        //     document.body.appendChild(link);
+        //     link.click();
+        //     document.body.removeChild(link);
+        //     setTimeout(() => URL.revokeObjectURL(url), 100);
+        // });
+
+
         var canvas = document.getElementById("gl-canvas");
-        canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'canvas_image.png';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            setTimeout(() => URL.revokeObjectURL(url), 100);
-        });
+        var dataURL = canvas.toDataURL('image/png');
+
+        const img = document.createElement('img');
+        img.src = dataURL;
+        img.style.maxWidth = '100%';
+
+        const tip = document.createElement('div');
+        tip.textContent = '长按图片可保存到相册';
+
+        document.body.appendChild(tip);
+        document.body.appendChild(img);
     }
     captureWebGLCanvasOne() {
         const width = canvas.width;
