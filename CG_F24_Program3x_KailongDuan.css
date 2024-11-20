@@ -4,10 +4,17 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(135deg, #FF6B6B, #4ECDC4);
     min-height: 100vh;
+
+}
+
+#radioForm {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .container {
     display: flex;
     align-items: flex-start;
@@ -20,19 +27,46 @@ body {
     width: 90%;
     max-width: 1400px;
 }
+
 .canvas-container {
     flex: 1.5;
+
+    height: 100%;
+    min-height: 700px;
+    min-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.canvas-container .canvas {
+    width: 650px;
+    height: 650px;
+
+}
+
+.canvas-container .btnlist {
+    margin-top: 20px;
+}
+
+
+
 #gl-canvas {
-    width: 100%;
+    max-width: 700px;
+    max-height: 700px;
+    width: auto;
     height: auto;
+    object-fit: contain;
     border-radius: 15px;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
+
 .controls {
-    flex: 0.8;
-    max-width:220px ;
+    flex: 0.7;
+    /* max-width:220px ; */
     background: rgba(255, 255, 255, 0.15);
     padding: 25px;
     border-radius: 15px;
@@ -40,23 +74,28 @@ body {
     max-height: 80vh;
     overflow-y: auto;
 }
+
 .controls::-webkit-scrollbar {
     width: 8px;
 }
+
 .controls::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
 }
+
 .controls::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
 }
+
 h2 {
     color: white;
     font-size: 1.5em;
     margin-bottom: 20px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 .filter-group {
     background: rgba(255, 255, 255, 0.1);
     margin-bottom: 15px;
@@ -64,20 +103,24 @@ h2 {
     border-radius: 12px;
     transition: all 0.3s ease;
 }
+
 .filter-group:hover {
     background: rgba(255, 255, 255, 0.2);
 }
+
 .filter-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
 }
+
 label {
     color: white;
     font-size: 0.9em;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
+
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
@@ -86,6 +129,7 @@ input[type="range"] {
     border-radius: 2px;
     margin: 10px 0;
 }
+
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 16px;
@@ -95,18 +139,21 @@ input[type="range"]::-webkit-slider-thumb {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
 input[type="radio"] {
     accent-color: #FF6B6B;
 }
+
 input[type="file"] {
     width: 50%;
     padding: 10px;
-    margin: 20px 0;
+    /* margin: 20px 0; */
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     border: 2px dashed rgba(255, 255, 255, 0.3);
     color: white;
 }
+
 .download-btn {
     padding: 10px 24px;
     font-size: 14px;
@@ -160,6 +207,7 @@ input[type="file"] {
     display: flex;
     flex-direction: column;
 }
+
 .color,
 .texture {
     margin-bottom: 30px;

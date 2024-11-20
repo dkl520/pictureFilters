@@ -12,9 +12,9 @@ class Controller {
         this.form.addEventListener('change', this.handleFormChange);
         this.form.addEventListener('input', this.handleFormInput);
         this.fileInput.onchange = this.handleFileInput;
-        this.btn.addEventListener('click',  this.handlePict);
+        this.btn.addEventListener('click', this.handlePict);
     }
-    handleFormChange=(event)=> {
+    handleFormChange = (event) => {
         if (event.target.name === "color") {
             this.handleShaderChange(event);
         } else {
@@ -83,12 +83,12 @@ class Controller {
     }
 
 
-    handleFormInput=(event)=> {
+    handleFormInput = (event) => {
         if (event.target.name !== "color") {
             this.handleValueChange(event);
         }
     }
-    handleShaderChange =(event)=> {
+    handleShaderChange = (event) => {
         fragmentName = event.target.value;
         program = this.programList.get(fragmentName);
         if (program == null) {
@@ -107,28 +107,48 @@ class Controller {
             this.loader.curMatrix = this.loader.halftonePattern16x16;
         }
     }
-    handleValueChange=(event)=> {
+    handleValueChange = (event) => {
         this.loader[event.target.name] = event.target.value;
     }
-    handleFileInput =(event)=> {
+    handleFileInput = (event) => {
         const file = event.target.files[0];
         const fileReader = new FileReader();
         fileReader.onload = (e) => this.handleFileLoad(e);
         fileReader.readAsArrayBuffer(file);
         event.target.value = '';
     }
-    handleFileLoad =(event)=> {
+    handleFileLoad = (event) => {
         const blob = new Blob([event.target.result]);
         const imageUrl = URL.createObjectURL(blob);
         const resultImage = new Image();
         resultImage.onload = () => this.processLoadedImage(resultImage, imageUrl);
         resultImage.src = imageUrl;
     }
-    processLoadedImage=(image, imageUrl)=> {
-        const canvas = document.createElement('canvas');
+    processLoadedImage = (image, imageUrl) => {
+
+        const cvs = document.createElement('canvas');
+        cvs.width = image.width;
+        cvs.height = image.height;
         canvas.width = image.width;
         canvas.height = image.height;
-        const ctx = canvas.getContext("2d");
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        const maxSize = 650;
+        let width = canvas.width;
+        let height = canvas.height;
+        if (width > maxSize || height > maxSize) {
+            if (width > height) {
+                width = maxSize;
+                height = (canvas.height * maxSize) / canvas.width;
+            } else {
+                height = maxSize;
+                width = (canvas.width * maxSize) / canvas.height;
+            }
+        }
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+
+
+        const ctx = cvs.getContext("2d");
         try {
             ctx.drawImage(image, 0, 0, image.width, image.height);
             const imageData = ctx.getImageData(0, 0, image.width, image.height);

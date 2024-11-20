@@ -23,8 +23,9 @@ class WebglModel {
 }
 window.onload = function init() {
     canvas = document.getElementById("gl-canvas");
-    gl = canvas.getContext('webgl2', {preserveDrawingBuffer: true});
+    gl = canvas.getContext('webgl2', { preserveDrawingBuffer: true });
     if (!gl) { alert("WebGL 2.0 isn't available"); }
+    gl.viewport(0, 0, canvas.width, canvas.height);
     gl.enable(gl.DEPTH_TEST);
     // gl.clearColor(1.0, 1.0, 1.0, 1.0);
     let webglModel = new WebglModel()
